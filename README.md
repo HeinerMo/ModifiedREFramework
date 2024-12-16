@@ -14,6 +14,7 @@ This framework is designed to require minimal configuration, enabling developers
 - **Integrated Dispatcher Process**: Simplifies workflows by combining the dispatcher within the initialization stage.
 - **Configurable Boolean Flags**: Easily toggle dispatcher execution and test mode without modifying the core code.
 - **Developer-Friendly Setup**: Preconfigured structure reduces manual setup time, letting you focus on development.
+- **Exception Screenshot on Init**: Exception screenshots are capture in the initialization stage when a system exception is thrown. 
 
 ---
 
