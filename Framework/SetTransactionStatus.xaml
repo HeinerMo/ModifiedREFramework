@@ -458,7 +458,7 @@
                           <OutArgument x:TypeArguments="x:String">[FolderPath]</OutArgument>
                         </Assign.To>
                         <Assign.Value>
-                          <InArgument x:TypeArguments="x:String">[FolderPath + in_ProcessFolderName + "\Screenshots\"]</InArgument>
+                          <InArgument x:TypeArguments="x:String">[FolderPath + in_ProcessFolderName + "\Exception_Screenshots\"]</InArgument>
                         </Assign.Value>
                       </Assign>
                       <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke TakeScreenshot workflow" sap:VirtualizedContainerService.HintSize="434,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="Framework\TakeScreenshot.xaml">
