@@ -450,7 +450,7 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
               <State.Transitions>
-                <Transition DisplayName="System Exception" sap:VirtualizedContainerService.HintSize="450,507" sap2010:WorkflowViewState.IdRef="Transition_4">
+                <Transition DisplayName="System Exception" sap:VirtualizedContainerService.HintSize="450,510" sap2010:WorkflowViewState.IdRef="Transition_4">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <av:PointCollection x:Key="ConnectorLocation">303.633333333333,628.666666666667 303.633333333333,722 644.5,722 644.5,72.11666666666666 477,72.11666666666666</av:PointCollection>
@@ -459,9 +459,8 @@
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <Transition.Condition>[SystemException IsNot Nothing]</Transition.Condition>
                   <Transition.To>
-                    <State x:Name="__ReferenceID3" sap2010:Annotation.AnnotationText="Read configuration file, initialize applications used in the process and run the Dispatcher workflow." DisplayName="Initialization" sap:VirtualizedContainerService.HintSize="682,1531" sap2010:WorkflowViewState.IdRef="State_2">
+                    <State x:Name="__ReferenceID3" sap2010:Annotation.AnnotationText="Read configuration file, initialize applications used in the process and run the Dispatcher workflow." DisplayName="Initialization" sap:VirtualizedContainerService.HintSize="254,119" sap2010:WorkflowViewState.IdRef="State_2">
                       <State.Entry>
                         <TryCatch DisplayName="Try initializing settings and applications" sap:VirtualizedContainerService.HintSize="636,1112" sap2010:WorkflowViewState.IdRef="TryCatch_2">
                           <sap:WorkflowViewStateService.ViewState>
@@ -692,12 +691,8 @@
                                         </Assign>
                                         <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke TakeScreenshot workflow" sap:VirtualizedContainerService.HintSize="434,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_31" UnSafe="False" WorkflowFileName="Framework\TakeScreenshot.xaml">
                                           <ui:InvokeWorkflowFile.Arguments>
-                                            <InArgument x:TypeArguments="x:String" x:Key="in_Folder">
-                                              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="ScreenshotsFolderPath" />
-                                            </InArgument>
-                                            <InOutArgument x:TypeArguments="x:String" x:Key="io_FilePath">
-                                              <VisualBasicReference x:TypeArguments="x:String" ExpressionText="ScreenshotPath" />
-                                            </InOutArgument>
+                                            <InArgument x:TypeArguments="x:String" x:Key="in_Folder">[ScreenshotsFolderPath]</InArgument>
+                                            <InOutArgument x:TypeArguments="x:String" x:Key="io_FilePath">[ScreenshotPath]</InOutArgument>
                                           </ui:InvokeWorkflowFile.Arguments>
                                         </ui:InvokeWorkflowFile>
                                       </Sequence>
@@ -854,6 +849,20 @@
                       </State.Variables>
                     </State>
                   </Transition.To>
+                  <Transition.Action>
+                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Email\SendEmail.xaml - Send Report" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_32" UnSafe="False" WorkflowFileName="Email\SendEmail.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_Subject">[Config("ErrorEmailSubject").ToString]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_EmailRecipients">[Config("ErrorEmailRecipients").ToString]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_Body">[Config("ErrorEmailBody").ToString + vbCrLf + SystemException.Message]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_BotEmail">[Config("BotEmail").ToString]</InArgument>
+                        <InArgument x:TypeArguments="s:String[]" x:Key="in_Attachment" />
+                        <InArgument x:TypeArguments="x:Int32" x:Key="in_ServerPort">[CInt(Config("EmailServerPort").ToString)]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_ServerAddress">[Config("EmailServerAddress").ToString]</InArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                    </ui:InvokeWorkflowFile>
+                  </Transition.Action>
+                  <Transition.Condition>[SystemException IsNot Nothing]</Transition.Condition>
                 </Transition>
                 <Transition sap2010:Annotation.AnnotationText="Business Rule Exception" DisplayName="Business Exception" sap:VirtualizedContainerService.HintSize="448.8,537.6" sap2010:WorkflowViewState.IdRef="Transition_1">
                   <sap:WorkflowViewStateService.ViewState>
